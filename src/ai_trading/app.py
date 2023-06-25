@@ -5,6 +5,13 @@ from src.ai_trading.template_parsers.Transform import Transform
 from src.ai_trading.utils import quality_score
 
 
+def add_new_resource(world_state:WorldState, resource_weight: ResourceWeight, resource_name, column_loc, values, weight):
+    print("Adding new resources to the csv files...")
+    world_state.add_resource(resource_name, column_loc, values)
+    resource_weight.add_resource(resource_name, weight)
+    print("Added new resource to the state and weights files.")
+
+
 def app_driver():
     print("Starting AI Powered World Trading Game...")
 
