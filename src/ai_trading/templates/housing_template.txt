@@ -1,0 +1,8 @@
+(TRANSFORM Kitabi
+	(INPUTS (Population 5)
+		(MetallicElements 1)
+		(Timber 5)
+		(MetallicAlloys 3))
+	(OUTPUTS (Population 5)
+		(HousingWaste 5)
+		(Housing 20)))
