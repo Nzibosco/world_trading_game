@@ -49,6 +49,10 @@ class WorldState:
         self.df = self.df.drop(resource_name, axis=1)
         self.save()
 
+    def add_resource(self, resource_name, location, values):
+        self.df.insert(loc=location, column=resource_name, value=values)
+        self.save()
+
     def update_country_resources(self, resource_name, value, country_name):
         if country_name not in self.countries:
             raise Exception(f"Country {country_name} does not exist")
