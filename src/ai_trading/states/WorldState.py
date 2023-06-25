@@ -3,8 +3,6 @@ import math
 import pandas as pd
 import os
 
-from src.ai_trading.states.RescourceWeight import ResourceWeight
-
 
 class Country:
     def __init__(self, name, resources):
@@ -66,20 +64,3 @@ class WorldState:
 
     def save(self):
         self.df.to_csv(self.state_file, sep='\t', index=False)
-
-
-#world_state = WorldState("../resources/world_state.csv")
-# print(world_state.df)
-# print(world_state.countries)
-# print(world_state.get_country_resources("Fantasia"))
-# world_state.update_country_resources("MetallicAlloys", 500, "Dusland")
-# print(world_state.get_country_resources("Fantasia"))
-# world_state.update_country_resources("HousingWaste", 0, "Kitabi")
-# world_state.save()
-# print(world_state.df)
-
-#resource_weights = ResourceWeight('../resources/resource_weights.csv')
-
-# for c in world_state.countries:
-#     country = world_state.countries[c]
-#     print(f"Quality of {country.name}: {country.calculate_quality(resource_weights)}")

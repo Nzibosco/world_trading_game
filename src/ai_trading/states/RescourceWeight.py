@@ -17,7 +17,7 @@ class ResourceWeight:
 
     def add_resource(self, res_name, weight):
         self.weights[res_name] = weight
-        self.df = self.df.append({'Resource': res_name, 'Weight': weight}, ignore_index=True)
+        self.df.loc[len(self.df)] = [res_name, weight]
         self._write_to_csv()
 
     def remove_resource(self, res_name):
@@ -29,10 +29,3 @@ class ResourceWeight:
     def _write_to_csv(self):
         self.df.to_csv(self.template_file, sep='\t', index=False)
 
-
-#resource_weights = ResourceWeight('../resources/resource_weights.csv')
-# print(resource_weights.get_weight('Population'))
-# resource_weights.set_weight('MetallicAlloys', 0.7)
-# resource_weights.set_weight('Timber', 0.3)
-# resource_weights.set_weight('MetallicElements', 0.4)
-#resource_weights.set_weight('Population', 0.1)
