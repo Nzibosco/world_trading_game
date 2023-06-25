@@ -46,9 +46,3 @@ class Transform:
                     else:
                         self.outputs[key] = int(value)
 
-# Usage:
-# transformation = Transform('../templates/electronics_template.txt')
-# print(transformation.country)
-# print(transformation.inputs)
-# print(transformation.outputs)
-# print(transformation.transform_template)
