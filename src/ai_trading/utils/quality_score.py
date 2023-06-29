@@ -11,8 +11,8 @@ def average_quality_score(world_state, resource_weights):
     else:
         average_quality = 0
 
-    # Keep floating point precision to 2
-    average_quality = round(average_quality, 2)
+    # Keep floating point precision to 4 max
+    average_quality = round(average_quality, 4)
 
     return average_quality
 
