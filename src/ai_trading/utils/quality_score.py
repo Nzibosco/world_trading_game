@@ -19,24 +19,23 @@ def average_quality_score(world_state, resource_weights):
 
 # Function to calculate state quality by country
 def calculate_country_quality_score(country, resource_weights):
-    raw_quality = 0
+    if 'Population' not in country.resources:
+        raise ValueError(f"calculate_country_quality_score():: Error - 'Population' resource not found for country {country.name}")
 
+    population = country.resources.get('Population')
+    if population <= 0:
+        raise ValueError(f"calculate_country_quality_score():: Error - 'Population' must be greater than zero for country {country.name}")
+
+    raw_quality = 0
     for resource, quantity in country.resources.items():
-        if quantity > 0:  # only consider resources with quantity greater than 0
+        if resource != 'Population':  # avoid counting population in the raw_quality calculation
             weight = resource_weights.get_weight(resource)
             raw_quality += weight * quantity
 
-    # Calculate the minimum and maximum possible quality scores
-    min_raw_quality = 0  # when all quantities are zero
-    max_raw_quality = sum([weight * max(country.resources.values()) for weight in resource_weights.weights.values()])
+    # Quality score is the sum of resource*weight divided by population
+    quality = raw_quality / population
 
-    # Linearly normalize the quality score to be between 0 and 1
-    if min_raw_quality == max_raw_quality:
-        quality = 0
-    else:
-        quality = (raw_quality - min_raw_quality) / (max_raw_quality - min_raw_quality)
-
-    # Keep floating point precision to 2
-    quality = round(quality, 2)
+    # Keep floating point precision to not more than 4
+    quality = round(quality, 4)
 
     return quality
