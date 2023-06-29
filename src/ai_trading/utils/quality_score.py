@@ -1,5 +1,10 @@
+from src.ai_trading.states.Country import Country
+from src.ai_trading.states.RescourceWeight import ResourceWeight
+from src.ai_trading.states.WorldState import WorldState
+
+
 # Function to calculate state quality for all countries in the world
-def average_quality_score(world_state, resource_weights):
+def average_quality_score(world_state: WorldState, resource_weights: ResourceWeight):
     total_quality = 0
     num_countries = len(world_state.countries)
 
@@ -18,7 +23,7 @@ def average_quality_score(world_state, resource_weights):
 
 
 # Function to calculate state quality by country
-def calculate_country_quality_score(country, resource_weights):
+def calculate_country_quality_score(country: Country, resource_weights: ResourceWeight):
     if 'Population' not in country.resources:
         raise ValueError(f"calculate_country_quality_score():: Error - 'Population' resource not found for country {country.name}")
 
