@@ -1,5 +1,13 @@
 import re
 
+
+def add_pairs(line, current_dict):
+    pairs = re.findall(r'\((\w+)\s(\d+)\)', line)
+    for pair in pairs:
+        key, value = pair
+        current_dict[key] = int(value)
+
+
 class Transform:
     def __init__(self, file_path):
         self.transform_template = file_path
@@ -34,8 +42,12 @@ class Transform:
                 self.country = line.split(' ')[1]
             elif line.startswith('(INPUTS'):
                 current_section = 'INPUTS'
+                # Add any inputs on the same line
+                add_pairs(line, self.inputs)
             elif line.startswith('(OUTPUTS'):
                 current_section = 'OUTPUTS'
+                # Add any outputs on the same line
+                add_pairs(line, self.outputs)
             elif line.startswith('(') and line.endswith(')') and current_section is not None:
                 # extract the key and value from the line
                 match = re.match(r'\((\w+)\s(\d+)\)', line)
@@ -45,4 +57,3 @@ class Transform:
                         self.inputs[key] = int(value)
                     else:
                         self.outputs[key] = int(value)
-
