@@ -1,6 +1,7 @@
 from src.ai_trading.schedule.Schedule import Schedule
 from src.ai_trading.states.RescourceWeight import ResourceWeight
 from src.ai_trading.states.WorldState import WorldState
+from src.ai_trading.template_parsers.Transfer import Transfer
 from src.ai_trading.template_parsers.Transform import Transform
 from src.ai_trading.utils import quality_score
 
@@ -31,7 +32,8 @@ def app_driver():
     electronics_template: Transform = Transform('./templates/electronics_template.txt')
     housing_template: Transform = Transform('./templates/housing_template.txt')
     print(housing_template.outputs)
-
+    housing_transfer: Transfer = Transfer('./templates/housing_transfer.txt')
+    print(housing_transfer)
     print("Created some templates. Adding to the schedule ...")
     schedule.add_template(electronics_template)
     schedule.add_template(housing_template)
