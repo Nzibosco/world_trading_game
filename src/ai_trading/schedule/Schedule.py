@@ -1,4 +1,26 @@
+from queue import PriorityQueue
+
 from src.ai_trading.states.WorldState import WorldState
+
+
+def load_resources(resources_filename):
+    pass
+
+
+def load_initial_state(initial_state_filename):
+    pass
+
+
+def generate_actions(current_state, resources):
+    pass
+
+
+def apply_action(current_state, action):
+    pass
+
+
+def output_schedules(best_schedules, output_schedule_filename):
+    pass
 
 
 class Schedule:
@@ -57,3 +79,51 @@ class Schedule:
             print('Restoring initial state')
             world_state.df = self.initial_state
             world_state.save()
+
+
+    '''
+    Country will use this agent to figure out the best schedule that maximize its state quality
+    '''
+    def country_scheduler(self, country_name, resources_filename,
+                          initial_state_filename, output_schedule_filename,
+                          num_output_schedules, depth_bound,
+                          frontier_max_size):
+        # Load resources -- Injecting world state obj gives all resources
+        resources = load_resources(resources_filename)
+
+        # Load initial state
+        initial_state = load_initial_state(initial_state_filename)
+
+        # Initialize a priority queue for the frontier
+        # From python doc on heapq: The queue uses the negative of utility because heapq in Python is a min-heap
+        frontier = PriorityQueue(maxsize=frontier_max_size)
+        frontier.put((-initial_state.utility, initial_state))
+
+        # Placeholder for best schedules found
+        best_schedules = []
+
+        # Explore the state space up to the depth-bound
+        while not frontier.empty():
+            # Take the state with the highest utility from the frontier
+            _, current_state = frontier.get()
+
+            # If we have reached the depth-bound, add the schedule to the best schedules
+            if current_state.depth >= depth_bound:
+                best_schedules.append(current_state.schedule)
+
+                # If we have found enough schedules, break
+                if len(best_schedules) >= num_output_schedules:
+                    break
+
+                continue
+
+            # Generate new states by applying actions
+            for action in generate_actions(current_state, resources):
+                new_state = apply_action(current_state, action)
+
+                # Add the new state to the frontier if it's not too large yet
+                if frontier.qsize() < frontier_max_size or new_state.utility > -frontier.queue[0][0]:
+                    frontier.put((-new_state.utility, new_state))
+
+        # Output the schedules
+        output_schedules(best_schedules, output_schedule_filename)
