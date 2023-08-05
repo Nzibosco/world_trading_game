@@ -1,6 +1,10 @@
 import re
 
-class Transfer:
+from src.ai_trading.template_parsers.Action import Action
+
+
+class Transfer(Action):
+
     def __init__(self, template_file_path):
         self.template_str = None
         self.from_country = None
@@ -27,4 +31,6 @@ class Transfer:
             self.resource = match.group(3)
             self.quantity = int(match.group(4))
 
+    def execute(self, world_state):
+        pass
 

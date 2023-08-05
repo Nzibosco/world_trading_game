@@ -1,5 +1,7 @@
 import re
 
+from src.ai_trading.template_parsers.Action import Action
+
 
 def add_pairs(line, current_dict):
     pairs = re.findall(r'\((\w+)\s(\d+)\)', line)
@@ -8,7 +10,7 @@ def add_pairs(line, current_dict):
         current_dict[key] = int(value)
 
 
-class Transform:
+class Transform(Action):
     def __init__(self, file_path):
         self.transform_template = file_path
         self.template_str = None
@@ -57,3 +59,6 @@ class Transform:
                         self.inputs[key] = int(value)
                     else:
                         self.outputs[key] = int(value)
+
+    def execute(self, world_state):
+        pass
