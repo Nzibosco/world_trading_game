@@ -1,9 +1,14 @@
-from src.ai_trading.schedule.Schedule import Schedule
-from src.ai_trading.states.RescourceWeight import ResourceWeight
+import logging
+import time
+import datetime as dt
+
+from src.ai_trading.schedule.Schedule import Schedule, generate_actions
+from src.ai_trading.states.ResourceWeight import ResourceWeight
 from src.ai_trading.states.WorldState import WorldState
 from src.ai_trading.template_parsers.Transfer import Transfer
 from src.ai_trading.template_parsers.Transform import Transform
 from src.ai_trading.utils import quality_score
+from src.ai_trading.utils.ai_logger import app_logger
 
 
 def add_new_resource(world_state:WorldState, resource_weight: ResourceWeight, resource_name, column_loc, values, weight):
@@ -13,21 +18,28 @@ def add_new_resource(world_state:WorldState, resource_weight: ResourceWeight, re
     print("Added new resource to the state and weights files.")
 
 
-def app_driver():
-    print("Starting AI Powered World Trading Game...")
+def app_driver(logger):
+    logger.debug("Starting AI Powered World Trading Game...")
 
-    print("Creating Initial World State...")
+    logger.info("Creating Initial World State...")
     world_state: WorldState = WorldState("./resources/world_state.csv")
 
-    print("Loading Resource Weight file")
+    logger.info("Loading Resource Weight file")
     resource_weights: ResourceWeight = ResourceWeight('./resources/resource_weights.csv')
 
-    print("Initial World State: ")
-    print(world_state.countries)
+    logger.info("Initial World State: ")
+    logger.debug(world_state.countries)
 
     print("Creating A schedule from Action Templates...")
-    schedule: Schedule = Schedule()
+    schedule: Schedule = Schedule('./templates', logger)
+    print('PRINTING A LIST OF ACTIONS.....')
+    actions = schedule.templates
+    for action in actions:
+        print(action)
 
+    schedule.country_scheduler('Boscoland', './resources/resource_weights.csv',
+                               "./resources/world_state.csv", './resources/output_schedule',
+                               5, 7, 5)
     print("Loading templates from files ... ")
     electronics_template: Transform = Transform('./templates/electronics_template.txt')
     housing_template: Transform = Transform('./templates/housing_template.txt')
@@ -55,4 +67,5 @@ def app_driver():
 
 
 if __name__ == "__main__":
-    app_driver()
+    ai_logger = app_logger("app_logs")
+    app_driver(ai_logger)

@@ -2,6 +2,7 @@ import pandas as pd
 import os
 
 from src.ai_trading.states.Country import Country
+from src.ai_trading.template_parsers.Action import Action
 
 
 class WorldState:
@@ -13,6 +14,7 @@ class WorldState:
         self.state_file = world_state_file
         self.df = pd.read_csv(world_state_file, delimiter='\t')
         self.countries = self.create_country_dict()
+        self.schedule: list[Action] = []
 
     def create_country_dict(self):
         countries = {}

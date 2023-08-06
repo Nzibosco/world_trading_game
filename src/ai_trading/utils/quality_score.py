@@ -1,5 +1,5 @@
 from src.ai_trading.states.Country import Country
-from src.ai_trading.states.RescourceWeight import ResourceWeight
+from src.ai_trading.states.ResourceWeight import ResourceWeight
 from src.ai_trading.states.WorldState import WorldState
 
 
