@@ -1,4 +1,4 @@
-(TRANSFORM Dusland
+(TRANSFORM Boscoland
     (INPUTS (Population 10)
         (MetallicElements 2))
     (OUTPUTS (Population 10)

@@ -17,9 +17,11 @@ def app_driver(logger):
     logger.info("Creating A schedule from Action Templates...")
     schedule: Schedule = Schedule('./templates', './resources/resource_weights.csv', "./resources/world_state.csv", logger)
 
-    schedule.country_scheduler('Boscoland', './resources/output_schedule', 5, 7, 5)
+    schedule.country_scheduler('Boscoland', 'output_schedule.txt', 5, 7, 5)
 
 
 if __name__ == "__main__":
     ai_logger = app_logger("app_logs")  # Configuring logger and a log file
     app_driver(ai_logger)
+
+    

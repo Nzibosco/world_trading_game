@@ -1,4 +1,4 @@
-(TRANSFORM Kitabi
+(TRANSFORM Boscoland
 	(INPUTS (Population 5)
 		(MetallicElements 1)
 		(Timber 5)
