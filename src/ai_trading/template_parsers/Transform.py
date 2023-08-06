@@ -17,11 +17,9 @@ def deduct_inputs(world_state: WorldState, country, inputs, logger):
     for k, v in inputs.items():
         if k != 'Population':
             current_value = world_state.get_country_resource_qty(country, k)
-            logger.info(f'Current value for resource {k} in country {country} is {current_value}')
             # Check if input has right balance
             if current_value > v:
                 next_val = current_value - v
-                logger.info(f'New value for {k} after executing this action is {next_val}')
                 world_state.update_country_resources(k, next_val, country)
 
 
@@ -29,9 +27,7 @@ def add_outputs(world_state: WorldState, country, outputs, logger):
     for k, v in outputs.items():
         if k != 'Population':
             current_value = world_state.get_country_resource_qty(country, k)
-            logger.info(f'Current value for resource {k} in country {country} is {current_value}')
             next_val = current_value + v
-            logger.info(f'New value for {k} after adding new outputs {next_val}')
             world_state.update_country_resources(k, next_val, country)
 
 
