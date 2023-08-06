@@ -1,4 +1,4 @@
-from src.ai_trading.schedule.Schedule import Schedule, generate_actions
+from src.ai_trading.schedule.Schedule import Schedule
 from src.ai_trading.states.ResourceWeight import ResourceWeight
 from src.ai_trading.states.WorldState import WorldState
 from src.ai_trading.utils.ai_logger import app_logger
