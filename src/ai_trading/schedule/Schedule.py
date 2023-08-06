@@ -12,6 +12,7 @@ from src.ai_trading.utils.PriorityQueue import PriorityQueue
 
 LINE_BREAK = '__________________________________________________________________________'
 
+
 class Schedule:
     def __init__(self, templates_path: str, resources_filename: str, initial_state_filename: str, logger):
         self.logger = logger
@@ -87,13 +88,13 @@ class Schedule:
 
     def output_schedules(self, country_name, best_schedules, output_schedule_filename):
         self.logger.info(f'Printing best schedules for country {country_name} to a file...')
-
         with open(output_schedule_filename, 'w') as file:
             for schedule, utility in best_schedules:
                 file.write("[\n")
                 for action in schedule:
-                    file.write(f"({action.__str__()}) EU: {utility}\n")
-                file.write("]\n")
+                    file.write(f"({action.__str__()}) \n")
+                file.write(f"                                  EU: {utility}\n]\n")
+        self.logger.info(f'Done writing best schedules for country {country_name} to {output_schedule_filename}')
 
 
 
