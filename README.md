@@ -5,14 +5,24 @@
 ## Description
 This project aims to create optimized schedules for countries to maximize their state quality. By using certain economic actions and accounting for various resource weights, the project produces the most efficient schedule for a given country based on the provided depth-bound and frontier size.
 
+## Project structure 
+
+Below picture shows the project structure and where to locate files
+
+![Project structure](https://github.com/Nzibosco/world_trading_game/issues/1)
+
+* Resource folder contains raw csv files representing initial world state and resource weight 
+* templates folder contains txt files representing transform and transfer operations. 
+* template parsers include classes for parsing and representing actions in templates. 
+
 Currently, the project support two types of actions:
 - Transform 
 - Transfer
 
-## Transform 
+### Transform 
 A country transforms its raw resources into manufactured resources. It is important to note that this action can result in waste which negatively impact the state quality as presented in resource weight file. 
 
-## Transfer
+### Transfer
 Transfer action occurs when country C1 transfers a certain amount of resource r to country c2.
 
 ## Requirements
@@ -41,8 +51,23 @@ Transfer action occurs when country C1 transfers a certain amount of resource r 
 2. Run the main script:
 
         python app.py --country_name "CountryName" --output_schedule_filename "output.txt" --num_output_schedules 10 --depth_bound 5 --frontier_max_size 100 
-        
-Replace the placeholders with your desired values.
+
+Replace the placeholders with your desired values. 
+
+Depending on your python environment, you can also use a multiline command as shown below: 
+
+        python app.py --templates_path ./templates
+              --resources_weights_path ./resources/resource_weights.csv
+              --world_state_path ./resources/world_state.csv
+              --country_name Boscoland
+              --output_schedule_filename output_schedule.txt
+              --num_output_schedules 5
+              --depth_bound 7
+              --frontier_max_size 5 
+
+**Note**: Please make sure you have the latest version of python installed. If you experience issues running the project from command line, please use IDE such as PyCharm and run ''app.py'' file. 
+Once the script is run, you will see output file in the destination you set. 
+Additionally, default arguments have been provided just in case. 
 
 ## Structure
 
