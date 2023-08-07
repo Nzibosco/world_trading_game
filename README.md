@@ -94,7 +94,7 @@ Pull requests are welcome. Please ensure your PR passes all tests before submitt
 
 ## License
 
-This project is licensed under the MIT License. See the `LICENSE` file for details.
+More info soon.
 
 ## Acknowledgments
 
