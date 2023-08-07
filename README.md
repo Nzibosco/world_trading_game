@@ -13,7 +13,8 @@ Below picture shows the project structure and where to locate files
 
 * Resource folder contains raw csv files representing initial world state and resource weight 
 * templates folder contains txt files representing transform and transfer operations. 
-* template parsers include classes for parsing and representing actions in templates. 
+* template parsers include classes for parsing and representing actions in templates.
+* schedule folder contains main logic for the scheduler and utils folder has a custom Priority Queue that was used for identifying best schedules.
 
 Currently, the project support two types of actions:
 - Transform 
@@ -21,9 +22,11 @@ Currently, the project support two types of actions:
 
 ### Transform 
 A country transforms its raw resources into manufactured resources. It is important to note that this action can result in waste which negatively impact the state quality as presented in resource weight file. 
+Refer to templates package to see the format.
 
 ### Transfer
 Transfer action occurs when country C1 transfers a certain amount of resource r to country c2.
+Refer to templates package for formatting.
 
 ## Requirements
 
