@@ -1,14 +1,5 @@
 from src.ai_trading.schedule.Schedule import Schedule
-from src.ai_trading.states.ResourceWeight import ResourceWeight
-from src.ai_trading.states.WorldState import WorldState
 from src.ai_trading.utils.ai_logger import app_logger
-
-
-def add_new_resource(world_state: WorldState, resource_weight: ResourceWeight, resource_name, column_loc, values, weight):
-    print("Adding new resources to the csv files...")
-    world_state.add_resource(resource_name, column_loc, values)
-    resource_weight.add_resource(resource_name, weight)
-    print("Added new resource to the state and weights files.")
 
 
 def app_driver(logger):
