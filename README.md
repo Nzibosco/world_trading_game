@@ -9,7 +9,7 @@ This project aims to create optimized schedules for countries to maximize their 
 
 Below picture shows the project structure and where to locate files
 
-![Project structure](https://github.com/Nzibosco/world_trading_game/issues/1)
+![Project structure](https://user-images.githubusercontent.com/46146669/258677768-402407bf-7da8-400d-a0ff-d4632891a086.png)
 
 * Resource folder contains raw csv files representing initial world state and resource weight 
 * templates folder contains txt files representing transform and transfer operations. 
